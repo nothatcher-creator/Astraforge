@@ -1,0 +1,382 @@
+[
+  {
+    "id": "google-bebasneue",
+    "kind": "font",
+    "title": "Bebas Neue",
+    "provider": "Google Fonts",
+    "description": "Bold titles · editable project font",
+    "tags": [
+      "bold titles",
+      "bebas neue"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Bebas+Neue",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/bebasneue/OFL.txt",
+    "creator": "Bebas Neue font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/bebasneue/BebasNeue-Regular.ttf",
+    "filename": "BebasNeue-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 61400
+  },
+  {
+    "id": "google-oswald",
+    "kind": "font",
+    "title": "Oswald",
+    "provider": "Google Fonts",
+    "description": "Rock · editable project font",
+    "tags": [
+      "rock",
+      "oswald"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Oswald",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/OFL.txt",
+    "creator": "Oswald font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/oswald/Oswald%5Bwght%5D.ttf",
+    "filename": "Oswald[wght].ttf",
+    "mime": "font/ttf",
+    "size": 172088
+  },
+  {
+    "id": "google-anton",
+    "kind": "font",
+    "title": "Anton",
+    "provider": "Google Fonts",
+    "description": "Heavy titles · editable project font",
+    "tags": [
+      "heavy titles",
+      "anton"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Anton",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/OFL.txt",
+    "creator": "Anton font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/anton/Anton-Regular.ttf",
+    "filename": "Anton-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 170812
+  },
+  {
+    "id": "google-archivoblack",
+    "kind": "font",
+    "title": "Archivo Black",
+    "provider": "Google Fonts",
+    "description": "Hip-hop · editable project font",
+    "tags": [
+      "hip-hop",
+      "archivo black"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Archivo+Black",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivoblack/OFL.txt",
+    "creator": "Archivo Black font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/archivoblack/ArchivoBlack-Regular.ttf",
+    "filename": "ArchivoBlack-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 90988
+  },
+  {
+    "id": "google-bangers",
+    "kind": "font",
+    "title": "Bangers",
+    "provider": "Google Fonts",
+    "description": "Comic · editable project font",
+    "tags": [
+      "comic",
+      "bangers"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Bangers",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/bangers/OFL.txt",
+    "creator": "Bangers font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/bangers/Bangers-Regular.ttf",
+    "filename": "Bangers-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 93148
+  },
+  {
+    "id": "google-cinzel",
+    "kind": "font",
+    "title": "Cinzel",
+    "provider": "Google Fonts",
+    "description": "Cinematic · editable project font",
+    "tags": [
+      "cinematic",
+      "cinzel"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Cinzel",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/OFL.txt",
+    "creator": "Cinzel font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf",
+    "filename": "Cinzel[wght].ttf",
+    "mime": "font/ttf",
+    "size": 125468
+  },
+  {
+    "id": "google-orbitron",
+    "kind": "font",
+    "title": "Orbitron",
+    "provider": "Google Fonts",
+    "description": "Synthwave · editable project font",
+    "tags": [
+      "synthwave",
+      "orbitron"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Orbitron",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/orbitron/OFL.txt",
+    "creator": "Orbitron font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/orbitron/Orbitron%5Bwght%5D.ttf",
+    "filename": "Orbitron[wght].ttf",
+    "mime": "font/ttf",
+    "size": 38576
+  },
+  {
+    "id": "google-rajdhani",
+    "kind": "font",
+    "title": "Rajdhani",
+    "provider": "Google Fonts",
+    "description": "Electronic · editable project font",
+    "tags": [
+      "electronic",
+      "rajdhani"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Rajdhani",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/rajdhani/OFL.txt",
+    "creator": "Rajdhani font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/rajdhani/Rajdhani-Regular.ttf",
+    "filename": "Rajdhani-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 377860
+  },
+  {
+    "id": "google-teko",
+    "kind": "font",
+    "title": "Teko",
+    "provider": "Google Fonts",
+    "description": "Metal · editable project font",
+    "tags": [
+      "metal",
+      "teko"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Teko",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/teko/OFL.txt",
+    "creator": "Teko font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/teko/Teko%5Bwght%5D.ttf",
+    "filename": "Teko[wght].ttf",
+    "mime": "font/ttf",
+    "size": 292108
+  },
+  {
+    "id": "google-kalam",
+    "kind": "font",
+    "title": "Kalam",
+    "provider": "Google Fonts",
+    "description": "Handwritten · editable project font",
+    "tags": [
+      "handwritten",
+      "kalam"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Kalam",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/kalam/OFL.txt",
+    "creator": "Kalam font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/kalam/Kalam-Regular.ttf",
+    "filename": "Kalam-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 427360
+  },
+  {
+    "id": "google-caveat",
+    "kind": "font",
+    "title": "Caveat",
+    "provider": "Google Fonts",
+    "description": "Acoustic · editable project font",
+    "tags": [
+      "acoustic",
+      "caveat"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Caveat",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/OFL.txt",
+    "creator": "Caveat font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf",
+    "filename": "Caveat[wght].ttf",
+    "mime": "font/ttf",
+    "size": 403648
+  },
+  {
+    "id": "google-dancingscript",
+    "kind": "font",
+    "title": "Dancing Script",
+    "provider": "Google Fonts",
+    "description": "Love song · editable project font",
+    "tags": [
+      "love song",
+      "dancing script"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Dancing+Script",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/OFL.txt",
+    "creator": "Dancing Script font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/dancingscript/DancingScript%5Bwght%5D.ttf",
+    "filename": "DancingScript[wght].ttf",
+    "mime": "font/ttf",
+    "size": 133636
+  },
+  {
+    "id": "google-lobster",
+    "kind": "font",
+    "title": "Lobster",
+    "provider": "Google Fonts",
+    "description": "Retro · editable project font",
+    "tags": [
+      "retro",
+      "lobster"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Lobster",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/lobster/OFL.txt",
+    "creator": "Lobster font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/lobster/Lobster-Regular.ttf",
+    "filename": "Lobster-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 406076
+  },
+  {
+    "id": "google-lora",
+    "kind": "font",
+    "title": "Lora",
+    "provider": "Google Fonts",
+    "description": "Indie · editable project font",
+    "tags": [
+      "indie",
+      "lora"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Lora",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/lora/OFL.txt",
+    "creator": "Lora font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/lora/Lora%5Bwght%5D.ttf",
+    "filename": "Lora[wght].ttf",
+    "mime": "font/ttf",
+    "size": 212196
+  },
+  {
+    "id": "google-montserrat",
+    "kind": "font",
+    "title": "Montserrat",
+    "provider": "Google Fonts",
+    "description": "Pop · editable project font",
+    "tags": [
+      "pop",
+      "montserrat"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Montserrat",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/OFL.txt",
+    "creator": "Montserrat font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+    "filename": "Montserrat[wght].ttf",
+    "mime": "font/ttf",
+    "size": 744936
+  },
+  {
+    "id": "google-playfairdisplay",
+    "kind": "font",
+    "title": "Playfair Display",
+    "provider": "Google Fonts",
+    "description": "Elegant · editable project font",
+    "tags": [
+      "elegant",
+      "playfair display"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Playfair+Display",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/OFL.txt",
+    "creator": "Playfair Display font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf",
+    "filename": "PlayfairDisplay[wght].ttf",
+    "mime": "font/ttf",
+    "size": 300724
+  },
+  {
+    "id": "google-spacegrotesk",
+    "kind": "font",
+    "title": "Space Grotesk",
+    "provider": "Google Fonts",
+    "description": "Modern · editable project font",
+    "tags": [
+      "modern",
+      "space grotesk"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Space+Grotesk",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/spacegrotesk/OFL.txt",
+    "creator": "Space Grotesk font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf",
+    "filename": "SpaceGrotesk[wght].ttf",
+    "mime": "font/ttf",
+    "size": 136676
+  },
+  {
+    "id": "google-courierprime",
+    "kind": "font",
+    "title": "Courier Prime",
+    "provider": "Google Fonts",
+    "description": "Vintage · editable project font",
+    "tags": [
+      "vintage",
+      "courier prime"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Courier+Prime",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/courierprime/OFL.txt",
+    "creator": "Courier Prime font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/courierprime/CourierPrime-Regular.ttf",
+    "filename": "CourierPrime-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 71188
+  },
+  {
+    "id": "google-rubik",
+    "kind": "font",
+    "title": "Rubik",
+    "provider": "Google Fonts",
+    "description": "Clean · editable project font",
+    "tags": [
+      "clean",
+      "rubik"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Rubik",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/rubik/OFL.txt",
+    "creator": "Rubik font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/rubik/Rubik%5Bwght%5D.ttf",
+    "filename": "Rubik[wght].ttf",
+    "mime": "font/ttf",
+    "size": 359804
+  },
+  {
+    "id": "google-pressstart2p",
+    "kind": "font",
+    "title": "Press Start 2P",
+    "provider": "Google Fonts",
+    "description": "Pixel · editable project font",
+    "tags": [
+      "pixel",
+      "press start 2p"
+    ],
+    "sourceUrl": "https://fonts.google.com/specimen/Press+Start+2P",
+    "license": "SIL Open Font License 1.1",
+    "licenseUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/pressstart2p/OFL.txt",
+    "creator": "Press Start 2P font contributors",
+    "downloadUrl": "https://raw.githubusercontent.com/google/fonts/main/ofl/pressstart2p/PressStart2P-Regular.ttf",
+    "filename": "PressStart2P-Regular.ttf",
+    "mime": "font/ttf",
+    "size": 118204
+  }
+]

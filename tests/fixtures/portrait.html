@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>LyricForge responsive test fixture</title>
+<style>
+body { margin: 0; background: #0d1015; color: #ddd; font: 14px system-ui; }
+header { display: flex; gap: 16px; align-items: center; padding: 12px 20px; }
+select { padding: 8px; }
+iframe { display: block; border: 1px solid #555; margin: 0 auto; }
+</style>
+<header>
+  <strong>Responsive editor test</strong>
+  <label>Viewport <select aria-label="Test viewport">
+    <option value="390,844">390 × 844 portrait</option>
+    <option value="360,740">360 × 740 portrait</option>
+    <option value="320,640">320 × 640 portrait</option>
+    <option value="430,932">430 × 932 portrait</option>
+    <option value="844,390">844 × 390 landscape</option>
+    <option value="1280,800">1280 × 800 desktop</option>
+  </select></label>
+</header>
+<iframe title="Phone preview" src="/" width="390" height="844"></iframe>
+<script>
+document.querySelector('select').addEventListener('change', event => {
+  const [width, height] = event.target.value.split(',');
+  const frame = document.querySelector('iframe');
+  frame.width = width; frame.height = height;
+});
+</script>
+</html>
