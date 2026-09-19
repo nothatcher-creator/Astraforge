@@ -14,16 +14,58 @@ asset resolution is checked under both `/Astraforge/` and a domain root.
 The GitHub Pages build is separate from the original server deployment and uses
 the same editor components and renderer. Its artifact verifier checks the
 subpath, JavaScript/CSS entry files, analysis and transcription workers, ONNX
-runtime, and all H.264 encoder parts. Browser verification of this deployment is
-recorded below once performed; previous browser results are not a claim that
-the new catalog or phone layout has been tested on a physical device.
+runtime, and all H.264 encoder parts. The clean GitHub Actions build and Pages
+deployment both passed for commit `34edde6`.
+
+### Published editor checks, September 14–19, 2026
+
+Tested the actual application at
+`https://nothatcher-creator.github.io/Astraforge/` in the cloud Chrome browser:
+
+- Imported and decoded the 7.381-second synthetic-speech test WAV. Waveform
+  analysis and approximate BPM worked under the repository subpath.
+- Local Whisper Tiny downloaded, transcribed the audio, and produced three
+  editable lyric lines with word timing. Applying the Metal preset worked.
+- A separate manual project imported the WAV and pasted four lyric lines.
+- Downloaded Bebas Neue through the catalog and applied it to the lyrics. It
+  appeared in the font picker and in the rendered video.
+- Previewed and applied the editable Bounce in text effect.
+- Wikimedia Commons returned 12 live image results. Previewed and imported
+  `Lake Tekapo 01.jpg` (12.0 MB, 4568 × 2886) by Krzysztof Golik, CC BY-SA 4.0,
+  onto a background track.
+- Saved and reloaded the project. Audio, four lyrics, the downloaded font and
+  background image all restored. Full preview playback reached the project end.
+- Rendered H.264 MP4 at 1920 × 1080 / 30 FPS. The 3,719,387-byte file played
+  through in the review player and arrived in the shared download directory.
+  `ffprobe` confirmed H.264 video and 48 kHz stereo AAC audio; total duration was
+  7.402667 seconds, within one 30 FPS frame of the 7.381-second project.
+  An external FFmpeg decode of the entire downloaded file completed without
+  errors. This checks codec, resolution, duration and decodability, not sample-
+  accurate audio/lyric alignment on a representative sung performance.
+- Exported and downloaded a 12,451,775-byte editable project. Its archive
+  preserved all three asset byte lengths, all four lyric events, source
+  attribution, and the complete font license in `CREDITS.txt`.
+- Created and saved an empty project, reloaded to clear the previous in-memory
+  assets, and imported the downloaded project file. The font, audio, image and
+  all four original lyric texts restored successfully.
+
+Download-event waits and direct video-element property reads timed out in the
+browser automation layer. The downloaded files were independently found in the
+documented shared directory and inspected; successful export is supported by
+those files and the visible review player, not by a download-event assertion.
+
+The local portrait fixture was blocked by the cloud browser's URL policy on
+September 19. No alternate route was used to bypass that restriction. The new
+catalog and existing portrait layout still need the phone checks below.
+
+### Earlier desktop test setup
 
 Updated 2026-09-13. Tests use a 7.365-second synthesized speech WAV, a custom
 TrueType font, a PNG background and a two-second H.264 video with burned-in
 source timestamps. This is not a sung rock or metal performance; these results
 do not establish transcription accuracy for music or long-session performance.
 
-## Passed
+## Earlier desktop verification (v2)
 
 - TypeScript compilation (no emit) and 17 automated regression tests.
 - Exact millisecond subtitle import/export, line/word retiming, splits/merges,
@@ -95,22 +137,16 @@ simulation alone does not establish real-device touch or keyboard behavior.
 
 ## Current limitations and remaining acceptance checks
 
-Browser download waits timed out for both bundled projects and MP4 output;
-files remained unconfirmed in the browser's shared download directory. The
-browser URL policy blocks its internal download-manager page. No browser
-security settings were changed and no unconfirmed file was used as a completed
-artifact. A persistent explicit Save file link is now provided after export.
-
-Consequently, completed OS-level downloads, opening a downloaded bundled project,
-and external ffprobe/audio checks are not yet verified. The embedded MP4 player
-verifies the actual encoded video, not the editor canvas. Both complete requested
-workflows must not be claimed as fully passed until downloaded files can also
-be checked.
+The v4 checks above resolve the earlier unconfirmed MP4/project downloads and
+bundled-project reopening. They do not establish every combination of browser,
+device, codec, song length and media format, or certify the entire original
+production specification. No browser security settings were changed.
 
 Also still required:
 
-- Native WebCodecs MP4/WebM paths on browsers that expose those codecs.
+- Explicit native/software encoder coverage and WebM on supported browsers.
 - Tablet/Android landscape, pinch gestures and long projects on real devices.
-- Browser keyframe editing and a complete bundled-file import round trip.
+- Browser keyframe editing with catalog styles and additional video layers.
 - Transcription accuracy on representative sung material and harsh vocals.
-- Optional WebMCP actions: modelContext was unavailable in the test browser.
+- Additional WebMCP actions beyond the read, preset, save and dialog actions
+  exercised during the v4 checks.

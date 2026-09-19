@@ -1,5 +1,7 @@
 # LyricForge
 
+[Open the live editor](https://nothatcher-creator.github.io/Astraforge/)
+
 A local-first lyric video editor built with React, TypeScript, Web Audio, canvas,
 Whisper, and deterministic video encoding. Brand settings live in
 `lib/lyricforge/model.ts`; the logo is `public/favicon.svg`.
