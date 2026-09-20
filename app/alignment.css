@@ -23,6 +23,13 @@
 .alignment-times time { display: block; font-family: var(--font-mono); color: #d3d7df; font-size: 10px; }
 .alignment-times svg { flex-shrink: 0; }
 .alignment-footer { position: sticky; bottom: -27px; background: #22242b; padding: 12px 0; margin-bottom: -10px; border-top: 1px solid #41444e; z-index: 2; }
+.alignment-notice { margin: 12px 0; padding: 12px; border: 1px solid #766044; border-radius: 7px; background: #342e26; font-size: 12px; }
+.alignment-notice strong { color: #efd3a7; }
+.alignment-notice p { margin-top: 6px; color: #c3beb7; line-height: 1.5; }
+.alignment-delta { margin-top: 10px; font-family: var(--font-mono); font-size: 11px; color: #e8c28e; }
+.alignment-anchor { display: flex; gap: 10px; align-items: end; }
+.alignment-anchor .number-field { flex: 1; min-width: 0; }
+.alignment-anchor button { flex-shrink: 0; }
 @media(max-width:650px) {
  .alignment-dialog { gap: 14px !important; }
  .alignment-dialog .dialog-icon { display: none; }

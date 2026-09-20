@@ -18,7 +18,54 @@ compacts transport, groups lyric creation actions, and gives lyric events their
 own scroll area. Device-level visual, touch and keyboard checks remain separate
 from these code checks. The earlier blocked local portrait fixture is not used.
 
-Live alignment checks will be recorded after the new build is deployed.
+### Published alignment checks, September 20, 2026
+
+The GitHub Actions build and Pages deployment passed for `ee201d3`. Tested the
+published editor in cloud Chrome with the public 11-second JFK speech fixture
+from the Transformers.js documentation dataset:
+
+- Imported the WAV and pasted three lines with deliberately even initial
+  timing. Stopping local alignment left all three texts and timestamps intact.
+- Whisper Tiny recognized all 22 words. Review displayed three strong matches,
+  original/proposed timestamps, independent checkboxes and working audition.
+- Cleared the selection and accepted only line three. Only that line changed
+  (7333–11000 ms became 8280–10720 ms). One Undo restored its original timing;
+  Redo restored the aligned timing. All original punctuation and clip IDs stayed.
+- Reopened alignment and accepted all three lines. Final intervals were
+  0–2320, 2320–8280 and 8280–10720 ms. Applied Metal, saved, and reloaded the
+  page; the audio, text, style and aligned intervals restored successfully.
+- The Words panel exposed editable millisecond timing after reopening. The
+  last line contained eight word intervals from 8280 through 10720 ms.
+- Full preview playback reached the 11000 ms project end.
+
+- Exported the aligned Metal project to MP4: 7,360,413 bytes, H.264 at
+  1920 × 1080 / 30 FPS, with 48 kHz stereo AAC. FFprobe reported 11.000000 s
+  video and 11.029333 s total including audio padding (within one video frame).
+  FFmpeg decoded the full downloaded file without errors. The download-event
+  wait timed out; the actual downloaded file in the shared directory provides
+  the evidence. This validates encoding, not perceptual lyric/vocal accuracy.
+
+This speech fixture does not establish recognition accuracy for sung or
+distorted vocals. The user subsequently reported inaccurate or unclear alignment
+on their song. Real-phone visual, keyboard and gesture acceptance remains
+outstanding.
+
+## v5.1 alignment correction
+
+The user's song feedback prompted new reproductions. Before the correction,
+tests failed for a missing early line stealing a later chorus and blocking
+subsequent lines, scattered common words classified as a strong phrase, and a
+large unanchored move preselected for application. Sequence selection replaces
+greedy reservation; these cases now pass. Anchor ranges and identical/word-only
+proposals are covered too. A review regression verifies that estimated edge
+words yield to adjacent recognized words instead of displacing them. All 43 tests, TypeScript, media preparation and the
+Pages production build pass locally.
+
+The UI exposes Base/Tiny model selection, a first-line expected-start anchor,
+signed start/end changes, an explicit Apply changes step, and a result that
+distinguishes line movement from karaoke-only refinement or unchanged timing.
+Live correction checks will be recorded after deployment. The problematic song
+has not been supplied, so its remaining recognition errors are not yet verified.
 
 
 ## v4 catalog and GitHub Pages update

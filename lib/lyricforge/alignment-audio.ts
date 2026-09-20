@@ -1,4 +1,11 @@
-import type {Clip} from './model';
+import {clamp,type Clip} from './model';
+/** Use the same expected section for audio preparation and word matching. */
+export function alignmentRequestedRange(lines:Pick<Clip,'start'|'end'>[],duration:number,windowMs:number,offsetMs=0){
+ if(!lines.length)throw new Error('Choose at least one lyric line.');
+ const offset=clamp(Number.isFinite(offsetMs)?offsetMs:0,-duration,duration);
+ const window=clamp(Number.isFinite(windowMs)?windowMs:5000,100,120000);
+ return {start:Math.max(0,Math.min(...lines.map(c=>c.start))+offset-window),end:Math.min(duration,Math.max(...lines.map(c=>c.end))+offset+window)};
+}
 export interface AlignmentAudioWindow {start:number;end:number;sourceOffset:number;sampleCount:number;}
 /** All values are milliseconds except sampleCount (16 kHz mono). */
 export function alignmentAudioWindow(clip:Clip,sourceDuration:number,from:number,to:number):AlignmentAudioWindow {

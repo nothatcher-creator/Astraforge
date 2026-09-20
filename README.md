@@ -98,12 +98,26 @@ Choose the audio clip, all unlocked lines or your selected lines, and a search
 window around their current times. **Find lyric timings** listens locally,
 then matches your original words against recognized words in that window.
 
+Base is the default recognition model; choose Tiny for lower memory use and
+faster processing. A five-second search window is the starting point. If the
+lyrics are far out of place, expand **Help it find the right song section** and
+set **First line starts near**, or pause at that vocal entry before opening
+alignment and choose **Use playhead**. This shifts the search expectation only.
+
 The review shows old and proposed timestamps, word match counts, and buttons
 to listen before or after. Strong matches start checked. Any missing words,
-uncertain spellings and ambiguous repeats require manual selection;
+uncertain spellings, ambiguous repeats, scattered phrases and large timing
+jumps require manual selection;
 unmatched lines are left alone. Apply only the lines you accept. Undo restores
 the entire previous timing in one step. Text, styling, line breaks and clip IDs
 are preserved; words and keyframes move with the accepted timing.
+
+Analysis does not change the timeline by itself. Review the signed Start/End
+changes, check the desired lines, then tap **Apply changes**. “Word timing only”
+changes karaoke timing while leaving the line edges in place. “Already aligned”
+and “No match” leave timing alone. Identical results create no undo entry. Lines
+are matched as an ordered sequence so one missed line cannot reserve a later
+chorus and block all following lyrics.
 
 This uses nearby speech-recognition matches, not phoneme-level forced alignment.
 Unrecognized word timings are interpolated and labeled as estimated in the
@@ -141,6 +155,7 @@ and timeline in that compact mode.
 | Audio scheduling and offline mix | `audio.ts` |
 | Waveform, beat and FFT analysis | `public/workers/analysis.js` |
 | Manual synchronization | `synchronization.ts` |
+| Existing lyric alignment and audio-window matching | `alignment.ts`, `alignment-client.ts`, `alignment-audio.ts`, `alignment.worker.ts` |
 | Lyric import and export | `lyrics.ts` |
 | Modular transcription providers | `transcription.ts`, `transcription.worker.ts` |
 | Shared preview/export rendering | `renderer.ts`, `animation.ts`, `video-pool.ts` |

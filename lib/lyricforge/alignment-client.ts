@@ -1,6 +1,6 @@
 'use client';
 import {audioEngine} from './audio';
-import {alignmentAudioWindow} from './alignment-audio';
+import {alignmentAudioWindow,alignmentRequestedRange} from './alignment-audio';
 import {LocalWhisper,type TranscriptionUpdate} from './transcription';
 import {publicAssetPath} from './public-url';
 import {lyricClips,type Clip,type Project,type Word} from './model';
@@ -12,7 +12,8 @@ export function alignmentSourceKey(project:Project,clip:Clip){return JSON.string
 function matchInWorker(project:Project,words:Word[],options:AlignmentOptions,signal:AbortSignal){
  return new Promise<AlignmentReport>((resolve,reject)=>{
   signal.throwIfAborted();
-  const worker=new Worker(publicAssetPath('workers/alignment.js'),{type:'module'});
+  // The Pages worker has a stable filename; invalidate cached greedy-matcher code.
+  const worker=new Worker(publicAssetPath('workers/alignment.js')+'?v=0.5.1',{type:'module'});
   const stop=()=>{worker.terminate();signal.removeEventListener('abort',abort);};
   const abort=()=>{stop();reject(new DOMException('Alignment cancelled','AbortError'));};
   signal.addEventListener('abort',abort,{once:true});
@@ -27,7 +28,8 @@ export async function alignLyricsToAudio(project:Project,clip:Clip,options:Align
  if(!lines.length)throw new Error('Choose at least one unlocked lyric line.');
  const buffer=audioEngine.buffers.get(clip.assetId||'');
  if(!buffer)throw new Error('Import or reopen this audio before aligning lyrics.');
- const range=alignmentAudioWindow(clip,buffer.duration*1000,Math.max(0,Math.min(...lines.map(c=>c.start))-options.windowMs),Math.min(project.duration,Math.max(...lines.map(c=>c.end))+options.windowMs));
+ const requested=alignmentRequestedRange(lines,project.duration,options.windowMs,options.expectedOffsetMs);
+ const range=alignmentAudioWindow(clip,buffer.duration*1000,requested.start,requested.end);
  const key=alignmentSourceKey(project,clip)+model;
  const cached=cache.find(c=>c.key===key&&c.start<=range.start&&c.end>=range.end);
  let words:Word[];

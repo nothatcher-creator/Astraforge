@@ -32,4 +32,4 @@ export class TapSynchronizer {
 }
 
 export {alignExistingLyrics,applyLyricAlignment} from './alignment';
-export {alignmentAudioWindow} from './alignment-audio';
+export {alignmentAudioWindow,alignmentRequestedRange} from './alignment-audio';

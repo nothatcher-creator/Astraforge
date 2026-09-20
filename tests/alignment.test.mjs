@@ -31,6 +31,57 @@ test('repeated choruses align to nearby occurrences in order',()=>{
  const r=sync.alignExistingLyrics(p,[...phrase('We rise again',1300),...phrase('We rise again',21300)],{windowMs:25000});
  assert.deepEqual(r.proposals.map(c=>[c.start,c.end]),[[1300,2400],[21300,22400]]);
 });
+test('a missing early line cannot steal a later chorus and block every following line',()=>{
+ const p=lineProject([[1000,2500,'Bring me home'],[4000,5500,'Across the ocean'],[8000,9500,'Bring me home']]);
+ const r=sync.alignExistingLyrics(p,[...phrase('Across the ocean',4200),...phrase('Bring me home',8200)],{windowMs:10000});
+ assert.equal(r.proposals[0].status,'unmatched');
+ assert.deepEqual(r.proposals.slice(1).map(c=>[c.start,c.end]),[[4200,5300],[8200,9300]]);
+});
+test('scattered matching words inside a different phrase are not strong matches',()=>{
+ const p=lineProject([[1000,5000,'We ride tonight']]);
+ const r=sync.alignExistingLyrics(p,phrase('We wake up ride to town tonight',1100),{windowMs:2000});
+ assert.notEqual(r.proposals[0].status,'matched');
+});
+test('a large unanchored timing jump requires review even for an exact phrase',()=>{
+ const p=lineProject([[1000,2500,'Bring me home']]);
+ const r=sync.alignExistingLyrics(p,phrase('Bring me home',8200),{windowMs:10000});
+ assert.equal(r.proposals[0].status,'review');
+});
+test('an explicit timing anchor searches the expected section without changing original text',()=>{
+ const p=lineProject([[1000,2500,'Bring me home'],[4000,5500,'Across the ocean']]);
+ const r=sync.alignExistingLyrics(p,[...phrase('Bring me home',21000),...phrase('Across the ocean',24000)],{windowMs:1000,expectedOffsetMs:20000});
+ assert.deepEqual(r.proposals.map(c=>[c.start,c.end]),[[21000,22100],[24000,25100]]);
+ assert.equal(p.clips[0].start,1000);assert.equal(r.proposals[0].originalStart,1000);
+ const next=sync.applyLyricAlignment(p,r,p.clips.map(c=>c.id));
+ assert.equal(next.clips[0].text,'Bring me home');assert.equal(next.clips[1].start,24000);
+ assert.deepEqual(sync.alignmentRequestedRange(p.clips,p.duration,1000,20000),{start:20000,end:26500});
+ assert.deepEqual(sync.alignmentRequestedRange(p.clips,p.duration,1000,-2000),{start:0,end:4500});
+});
+test('unchanged alignment creates no edit and distinguishes word-only refinements',()=>{
+ const p=lineProject([[1300,2400,'We rise again']]);
+ const recognized=phrase('We rise again',1300);
+ const r=sync.alignExistingLyrics(p,recognized,{windowMs:2000});
+ assert.equal(r.proposals[0].change,'words');
+ const next=sync.applyLyricAlignment(p,r,[p.clips[0].id]);
+ const second=sync.alignExistingLyrics(next,recognized,{windowMs:2000});
+ assert.equal(second.proposals[0].change,'none');
+ assert.equal(sync.applyLyricAlignment(next,second,[p.clips[0].id]),next);
+});
+test('estimated edge words give way to adjacent recognized words instead of stealing their timing',()=>{
+ for(const nextStart of [2600,2500]){
+  const p=lineProject([[1000,2500,'We rise again'],[2600,4200,'Let the light shine']]);
+  const r=sync.alignExistingLyrics(p,[...phrase('We rise again',1300),{text:'the',start:nextStart,end:2900},{text:'light',start:3000,end:3300},{text:'shine',start:3400,end:3700}],{windowMs:2000});
+  assert.deepEqual([r.proposals[0].start,r.proposals[0].end,r.proposals[0].matchedWords],[1300,2400,3]);
+  assert.equal(r.proposals[0].status,'matched');
+  assert.equal(r.proposals[1].status,'review');
+  assert.deepEqual([r.proposals[1].start,r.proposals[1].end],[2400,3700]);
+  assert.deepEqual(r.proposals[1].words[0],{text:'Let',start:2400,end:nextStart});
+ }
+ const p=lineProject([[1000,2800,'We rise again tonight'],[2500,4200,'Let the light shine']]);
+ const r=sync.alignExistingLyrics(p,[...phrase('We rise again',1300),...phrase('Let the light shine',2500)],{windowMs:2000});
+ assert.equal(r.proposals[0].matchedWords,3);assert.equal(r.proposals[1].matchedWords,4);
+ assert.deepEqual(r.proposals[0].words.at(-1),{text:'tonight',start:2400,end:2500});
+});
 test('search boundaries and unrelated speech cannot move a lyric',()=>{
  const p=lineProject([[1000,3000,'We rise again']]);
  for(const words of [phrase('We rise again',10000),phrase('This is unrelated',1100),[]]){
