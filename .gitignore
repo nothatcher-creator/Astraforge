@@ -52,3 +52,5 @@ next-env.d.ts
 /public/workers/ffmpeg*
 /public/workers/ort-wasm*
 /public/workers/transcription.js
+
+/public/workers/alignment.js

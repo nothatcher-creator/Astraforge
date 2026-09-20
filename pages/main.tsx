@@ -1,3 +1,4 @@
+import '../app/alignment.css';
 import {createRoot} from 'react-dom/client';
 import Editor from '../components/editor/Editor';
 import '../app/globals.css';

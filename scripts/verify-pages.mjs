@@ -20,7 +20,7 @@ for(const url of urls) {
   assert.ok(resolved.pathname.startsWith(base),`Asset escapes the Pages subpath: ${url}`);
   await exists(decodeURIComponent(resolved.pathname.slice(base.length)));
 }
-for(const name of ['analysis.js','transcription.js','ffmpeg-worker.js','ffmpeg-core.js','ort-wasm-simd-threaded.wasm','ort-wasm-simd-threaded.mjs'])await exists('workers/'+name);
+for(const name of ['analysis.js','alignment.js','transcription.js','ffmpeg-worker.js','ffmpeg-core.js','ort-wasm-simd-threaded.wasm','ort-wasm-simd-threaded.mjs'])await exists('workers/'+name);
 const manifest=JSON.parse(await readFile(join(root,'workers/ffmpeg-manifest.json'),'utf8'));
 assert.ok(Array.isArray(manifest.parts)&&manifest.parts.length>0,'The H.264 encoder manifest is empty.');
 for(const part of manifest.parts){assert.match(part,/^ffmpeg-core-\d+\.part$/);await exists('workers/'+part);}

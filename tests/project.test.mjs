@@ -8,6 +8,7 @@ test('bundled project preserves asset bytes, fonts, words and keyframes', async 
   const track = makeTrack('lyrics', 'Lyrics');
   const line = makeClip('lyrics', track.id, 125, 3250, 'Every word remains editable');
   line.words[0].start = 155;
+  line.timingSource = 'aligned';
   line.keyframes = [{ id: 'key', time: 2200, property: 'opacity', value: 0.6, easing: 'linear' }];
   p.tracks = [track]; p.clips = [line];
   p.lyricStyle.font = 'Project Serif';

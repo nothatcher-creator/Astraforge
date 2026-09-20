@@ -10,7 +10,7 @@ const wasm=readFileSync(join(esm,'ffmpeg-core.wasm')),parts=[];
 for(let i=0;i<wasm.length;i+=8*1024*1024){const name=`ffmpeg-core-${parts.length}.part`;writeFileSync(join(out,name),wasm.subarray(i,i+8*1024*1024));parts.push(name);}
 writeFileSync(join(out,'ffmpeg-manifest.json'),JSON.stringify({parts}));
 const ffRoot=join(root,'node_modules/@ffmpeg/ffmpeg');
-for(const [src,dest] of [[join(ffRoot,'dist/esm/worker.js'),'ffmpeg-worker.js'],[join(root,'lib/lyricforge/transcription.worker.ts'),'transcription.js']])buildSync({entryPoints:[src],bundle:true,format:'esm',platform:'browser',minify:true,outfile:join(out,dest)});
+for(const [src,dest] of [[join(ffRoot,'dist/esm/worker.js'),'ffmpeg-worker.js'],[join(root,'lib/lyricforge/transcription.worker.ts'),'transcription.js'],[join(root,'lib/lyricforge/alignment.worker.ts'),'alignment.js']])buildSync({entryPoints:[src],bundle:true,format:'esm',platform:'browser',minify:true,outfile:join(out,dest)});
 const tfRoot=realpathSync(join(root,'node_modules/@huggingface/transformers'));
 const tfRequire=createRequire(join(tfRoot,'package.json'));
 const ortDist=dirname(tfRequire.resolve('onnxruntime-web'));

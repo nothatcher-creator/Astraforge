@@ -1,3 +1,4 @@
+import "./alignment.css";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./phone.css";

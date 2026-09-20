@@ -1,5 +1,26 @@
 # Verification record
 
+## v5 existing-lyric alignment and portrait workspace
+
+Local checks passed: 37 regression tests, TypeScript, media worker preparation
+and the complete Pages production build/artifact verifier. The new alignment
+regression was run against the previous code and failed before implementation.
+A review regression also failed before the fix that makes every partial match
+require explicit selection, even when its first and last words match.
+The suite covers first/last word anchors, exact millisecond word timestamps,
+repeated phrases, bounded search, partial matches, original text preservation,
+locked and unselected lines, stale proposals, one-step undo, overlapping
+recognizer results, trimmed/looped source timing, and aligned project archives.
+
+The user's phone screenshot exposed fixed preview/timeline rows and lyric
+controls consuming the scrollable area. The update collapses the timeline,
+compacts transport, groups lyric creation actions, and gives lyric events their
+own scroll area. Device-level visual, touch and keyboard checks remain separate
+from these code checks. The earlier blocked local portrait fixture is not used.
+
+Live alignment checks will be recorded after the new build is deployed.
+
+
 ## v4 catalog and GitHub Pages update
 
 Passed locally: **26 automated tests**, `pnpm typecheck`, `pnpm media:prepare`,

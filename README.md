@@ -91,22 +91,46 @@ The first session contains clearly labelled original example lyrics and a
 synthesized instrumental. These example lyrics are not a transcription of that
 instrumental. Importing a song into the example starts a clean song session.
 
+## Align lyrics you already have
+
+In **Lyrics**, choose **Align existing lyrics** (on a phone: **Align lyrics**).
+Choose the audio clip, all unlocked lines or your selected lines, and a search
+window around their current times. **Find lyric timings** listens locally,
+then matches your original words against recognized words in that window.
+
+The review shows old and proposed timestamps, word match counts, and buttons
+to listen before or after. Strong matches start checked. Any missing words,
+uncertain spellings and ambiguous repeats require manual selection;
+unmatched lines are left alone. Apply only the lines you accept. Undo restores
+the entire previous timing in one step. Text, styling, line breaks and clip IDs
+are preserved; words and keyframes move with the accepted timing.
+
+This uses nearby speech-recognition matches, not phoneme-level forced alignment.
+Unrecognized word timings are interpolated and labeled as estimated in the
+review. Singing and distorted vocals can limit recognition. Increase the search
+window if the estimated line times are too far away, or select a small section
+and use the manual Sync tools. No project audio is uploaded. Audio trims,
+offsets and loops are included when preparing the clip for analysis.
+
 ## Phone workspace
 
-On screens up to 650 px wide, the preview, playback controls, timeline and
-editing panel stack vertically. Bottom navigation opens **Preview**, **Lyrics**,
-**Media** and **Style**; **More** contains text, genre presets, effects and
-elements. **Expand** gives the editing panel more space while keeping playback
-available. Focusing a lyric or property field expands it automatically.
+On screens up to 650 px wide, a compact playback bar and collapsed timeline
+leave more room for the preview and lyric list. Tap **Timeline → Show** to open
+its tracks while keeping playback visible, or select **Preview** in the bottom
+navigation for the full viewer and timeline. Lyrics scroll separately from
+their controls.
 
-Use **Fit song** to see the entire song, swipe the timeline toolbar for more
-tools, and open a track's three-dot menu to hide, lock, mute or reorder it.
-Preview mode enlarges the canvas and timeline. Selecting another bottom tab
-returns to editing. The project menu contains Save, Open and project downloads.
+**Add lyrics** contains Auto Detect, Paste and Import. **Align lyrics** retimes
+existing text; the search icon opens lyric search. **More playback controls**
+(next to speed) contains frame stepping, Stop, loop selection and volume.
 
-The layout includes safe-area spacing and a resizable viewport for phone
-keyboards. Actual device keyboard, pinch and orientation behavior still need
-verification; see `QA.md`.
+Bottom navigation opens **Preview**, **Lyrics**, **Media** and **Style**;
+**More** contains text, presets, effects, elements and the online catalog.
+**Expand** gives the editing panel more space while keeping playback available.
+Focusing an editing field expands it automatically; **Restore** returns the
+preview. Viewports up to 620 px tall prioritize editing and playback, including
+when the keyboard reduces the available height. Use **Preview** for the canvas
+and timeline in that compact mode.
 
 ## Architecture
 

@@ -1,0 +1,37 @@
+.alignment-dialog { max-width: 720px !important; }
+.alignment-settings { display: grid; gap: 14px; border: 0; padding: 0; min-width: 0; }
+.alignment-settings:disabled { opacity: .55; }
+.alignment-settings .choice { width: 100%; min-width: 0; }
+.alignment-settings .choice > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.alignment-settings .number-field { padding: 0; }
+.alignment-advanced summary, .alignment-transcript summary { cursor: pointer; color: #b7ac9c; font-size: 12px; min-height: 36px; padding: 8px 0; }
+.alignment-summary { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12px; color: #b4b9c5; }
+.alignment-summary strong { color: #edc99a; }
+.alignment-selection { display: flex; gap: 16px; }
+.alignment-selection button { color: #e6bd89; font-size: 12px; min-height: 40px; }
+.alignment-rows { display: grid; gap: 10px; }
+.alignment-row { border: 1px solid #464953; background: #1c1e24; border-radius: 8px; padding: 12px; }
+.alignment-row.matched { border-left: 3px solid #7dac93; }
+.alignment-row.review { border-left: 3px solid #d1a264; }
+.alignment-line { display: flex; align-items: flex-start; gap: 11px; cursor: pointer; }
+.alignment-line input { width: 20px; height: 20px; min-width: 20px; margin-top: 2px; accent-color: #f2b66d; }
+.alignment-line strong { display: block; font-weight: 500; font-size: 14px; overflow-wrap: anywhere; }
+.alignment-line small { display: block; color: #a5b6c5; font-size: 11px; margin-top: 5px; }
+.alignment-row > p { color: #939aa8; font-size: 11px; line-height: 1.5; margin: 10px 0; }
+.alignment-times { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.alignment-times button { display: flex; align-items: center; gap: 8px; text-align: left; background: #2a2d35; border-radius: 5px; padding: 8px; min-height: 44px; color: #c8b89f; font-size: 10px; }
+.alignment-times time { display: block; font-family: var(--font-mono); color: #d3d7df; font-size: 10px; }
+.alignment-times svg { flex-shrink: 0; }
+.alignment-footer { position: sticky; bottom: -27px; background: #22242b; padding: 12px 0; margin-bottom: -10px; border-top: 1px solid #41444e; z-index: 2; }
+@media(max-width:650px) {
+ .alignment-dialog { gap: 14px !important; }
+ .alignment-dialog .dialog-icon { display: none; }
+ .alignment-dialog .privacy-note { padding: 9px; font-size: 11px; }
+ .alignment-dialog .dialog-two { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); }
+ .alignment-times { grid-template-columns: 1fr; }
+ .alignment-times button { font-size: 11px; }
+ .alignment-times time { font-size: 11px; }
+ .alignment-footer { bottom: -20px; gap: 8px; }
+ .alignment-footer button { min-height: 44px; font-size: 12px; }
+ .alignment-footer > .primary-button { flex-basis: 100%; }
+}

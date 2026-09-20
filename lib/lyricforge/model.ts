@@ -16,7 +16,7 @@ export interface Style {
 }
 export interface Clip {
   id:string; trackId:string; kind:Kind; start:number; end:number; name:string; text:string;
-  assetId?:string; offset:number; loop:boolean; section:Section; words:Word[]; confidence?:number; timingSource?:'manual'|'estimated'|'detected';
+  assetId?:string; offset:number; loop:boolean; section:Section; words:Word[]; confidence?:number; timingSource?:'manual'|'estimated'|'detected'|'aligned';
   style:Partial<Style>; keyframes:Keyframe[]; group?:string;
   fit:'cover'|'contain'; brightness:number; contrast:number; saturation:number; hue:number; blend:GlobalCompositeOperation;
   visualizer?:'Bars'|'Spectrum'|'Waveform'|'Circle'|'Particles'|'Glow'|'Beat flash'; sensitivity:number; smoothing:number;
