@@ -31,9 +31,10 @@ undo entry or claim a lyric moved.
 - [x] Add anchor/audio-range and no-op/word-only behavioral checks.
 - [x] Implement model, anchor, delta and explicit-apply UI.
 - [x] Run tests, types, production build and independent code review.
-- [ ] Publish to the existing Astraforge main branch and verify deployment.
-- [ ] Verify anchor/apply/no-change UI on the published editor.
-- [ ] Record speech/export evidence and real-song testing limits; package source.
+- [x] Publish to the existing Astraforge main branch and verify deployment.
+- [x] Verify anchor/apply/no-change UI on the published editor.
+- [x] Record speech/export evidence and real-song testing limits.
+- [x] Package source from the published commit; refresh the archive after the QA-only documentation commit.
 
 Recognition of sung vocals remains distinct from word matching. A speech fixture
 cannot validate the user's song. Request the problematic audio/project to diagnose

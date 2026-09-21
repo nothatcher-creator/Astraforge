@@ -64,8 +64,35 @@ Pages production build pass locally.
 The UI exposes Base/Tiny model selection, a first-line expected-start anchor,
 signed start/end changes, an explicit Apply changes step, and a result that
 distinguishes line movement from karaoke-only refinement or unchanged timing.
-Live correction checks will be recorded after deployment. The problematic song
-has not been supplied, so its remaining recognition errors are not yet verified.
+
+### Published correction checks, September 21, 2026
+
+GitHub Actions build and Pages deployment succeeded for `624f513`
+(run `35567144347`). Repeated the published-browser alignment workflow with
+the same public 11-second speech fixture and three manually pasted lines:
+
+- Confirmed English Base and a ±5-second search as the visible defaults.
+- Set the first-line expected start to 0.500 s. The search shift updated;
+  Use playhead returned it to 0.000 s. The project's text and timing did not
+  change while configuring or analyzing.
+- Base recognized all 22 words. Review showed three strong matches, signed
+  start/end deltas and “Suggestions ready. Nothing has moved yet.” Before
+  Apply, project timing was still 0–3667, 3667–7333 and 7333–11000 ms.
+- Apply changes moved the intervals to 0–1980, 3380–7320 and 7320–10380 ms.
+  All original text, punctuation and clip IDs remained intact. The result
+  explicitly reported “3 lyric lines moved · 0 unchanged.”
+- Running alignment again reused recognition, reported “No timing changes
+  found,” labeled all three lines Already aligned, and disabled Apply changes
+  with zero selected lines. It did not create a spurious history entry.
+- A single Undo restored all three original intervals; Redo restored the
+  aligned intervals. Saving and reloading restored the aligned project.
+
+The Base and Tiny fixtures produce different timestamps; these checks validate
+matching, review, application and persistence, not perceptual timing accuracy.
+The user's problematic song has not been supplied, so its remaining recognition
+errors cannot yet be reproduced. Real-phone visual/touch checks also remain
+outstanding. The v5 MP4 evidence above still applies to the unchanged renderer;
+no additional MP4 render was performed for this matcher-only correction.
 
 
 ## v4 catalog and GitHub Pages update
