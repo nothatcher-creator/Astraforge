@@ -1,5 +1,37 @@
 # Verification record
 
+## v5.2 whole-song alignment
+
+The supplied private project reproduced a concrete limitation: 86 of 102 lines
+still had estimated timing, the first verse was over 25 seconds outside the
+nearby search, and previous partial edits had reordered 20 lines when sorted
+by current timestamps. Whole-song search now follows source order by default,
+with explicit timeline-order and nearby alternatives. The source audio and
+transcripts remain outside this repository.
+
+New regressions failed before implementation for whole-song timing beyond two
+minutes, source order after crossed partial edits, selected/locked/range guards,
+and split recognized words. All 51 tests, TypeScript, media preparation and the
+Pages build/artifact verification pass locally. Repeated phrases remain under
+review; one occurrence cannot be reused by multiple lines. A split printed word
+keeps its original text and spans the adjacent recognized words, but cannot
+join speech across a long gap. Review also reproduced and fixed a merged-line
+source-order regression and an ambiguous repeated target with only one heard
+occurrence; selected-only matching keeps that ambiguity visible.
+
+Reprocessed the actual 322.294-second project locally with quantized Whisper
+Small English using the worker's overlapping 24-second chunk scheme. The run
+returned 521 recognition entries. On those same words, nearby search proposed
+45 of 102 lines; whole-song source-order search proposed 87 (22 strong matches,
+65 requiring review, 15 not found). These are matching-coverage measurements,
+not human-verified timing accuracy. Recognition still mishears distorted vocals
+and misses several ad-libs. The UI makes those limitations visible and requires
+explicit application. No new MP4 render is required by this matcher-only change;
+the renderer and prior export evidence below are unchanged.
+
+Published-browser checks will be recorded after deployment. Real-phone touch
+and visual acceptance remain outstanding.
+
 ## v5 existing-lyric alignment and portrait workspace
 
 Local checks passed: 37 regression tests, TypeScript, media worker preparation

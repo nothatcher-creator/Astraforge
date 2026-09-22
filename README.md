@@ -95,19 +95,32 @@ instrumental. Importing a song into the example starts a clean song session.
 
 In **Lyrics**, choose **Align existing lyrics** (on a phone: **Align lyrics**).
 Choose the audio clip, all unlocked lines or your selected lines, and a search
-window around their current times. **Find lyric timings** listens locally,
-then matches your original words against recognized words in that window.
+mode. **Find lyric timings** listens locally, then matches your original words
+against recognized words without replacing the text.
 
-Base is the default recognition model; choose Tiny for lower memory use and
-faster processing. A five-second search window is the starting point. If the
-lyrics are far out of place, expand **Help it find the right song section** and
-set **First line starts near**, or pause at that vocal entry before opening
-alignment and choose **Use playhead**. This shifts the search expectation only.
+- **Find across whole song** ignores estimated line positions and follows the
+  lyric sequence through the audio clip. It is the default when most lines
+  have estimated timing, such as newly pasted lyrics. **Original paste / import
+  order** keeps the source sequence even when an earlier partial alignment has
+  moved some lines past their neighbors. Choose **Current timeline order** if
+  you deliberately rearranged the lyrics.
+- **Refine nearby timing** searches around each existing interval. A ±5-second
+  window is the starting point. For a known common shift, expand **Help it find
+  the right song section** and set **First line starts near**, or pause at that
+  vocal entry before opening alignment and choose **Use playhead**. The anchor
+  changes the search expectation only; it is not used in whole-song mode.
+
+Base is the default recognition model; choose Tiny for lower memory use or
+Small for difficult vocals when your device has enough memory. Small has a
+larger download and can be slow on phones. English and multilingual versions
+are available. Word splits such as “offstage” / “off stage” and “alright” /
+“all right” preserve the original spelling and cover both recognized words.
 
 The review shows old and proposed timestamps, word match counts, and buttons
 to listen before or after. Strong matches start checked. Any missing words,
 uncertain spellings, ambiguous repeats, scattered phrases and large timing
-jumps require manual selection;
+jumps in nearby mode require manual selection. Whole-song mode can propose
+large moves for complete unique phrases;
 unmatched lines are left alone. Apply only the lines you accept. Undo restores
 the entire previous timing in one step. Text, styling, line breaks and clip IDs
 are preserved; words and keyframes move with the accepted timing.
@@ -118,12 +131,16 @@ changes karaoke timing while leaving the line edges in place. “Already aligned
 and “No match” leave timing alone. Identical results create no undo entry. Lines
 are matched as an ordered sequence so one missed line cannot reserve a later
 chorus and block all following lyrics.
+The summary separates **to review**, **not found**, and **already aligned**.
+**Select all suggestions** includes uncertain candidates, so audition those
+before applying. Search settings collapse when results are ready to leave room
+for review on a phone.
 
-This uses nearby speech-recognition matches, not phoneme-level forced alignment.
+This uses speech-recognition matches, not phoneme-level forced alignment.
 Unrecognized word timings are interpolated and labeled as estimated in the
-review. Singing and distorted vocals can limit recognition. Increase the search
-window if the estimated line times are too far away, or select a small section
-and use the manual Sync tools. No project audio is uploaded. Audio trims,
+review. Singing and distorted vocals can limit recognition. Whole-song search
+helps with incorrect starting times; it cannot recover words the recognizer
+does not hear. Use the manual Sync tools for those lines. No project audio is uploaded. Audio trims,
 offsets and loops are included when preparing the clip for analysis.
 
 ## Phone workspace

@@ -1,7 +1,8 @@
 import {clamp,type Clip} from './model';
 /** Use the same expected section for audio preparation and word matching. */
-export function alignmentRequestedRange(lines:Pick<Clip,'start'|'end'>[],duration:number,windowMs:number,offsetMs=0){
+export function alignmentRequestedRange(lines:Pick<Clip,'start'|'end'>[],duration:number,windowMs:number,offsetMs=0,mode:'nearby'|'song'='nearby'){
  if(!lines.length)throw new Error('Choose at least one lyric line.');
+ if(mode==='song')return {start:0,end:duration};
  const offset=clamp(Number.isFinite(offsetMs)?offsetMs:0,-duration,duration);
  const window=clamp(Number.isFinite(windowMs)?windowMs:5000,100,120000);
  return {start:Math.max(0,Math.min(...lines.map(c=>c.start))+offset-window),end:Math.min(duration,Math.max(...lines.map(c=>c.end))+offset+window)};

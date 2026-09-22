@@ -26,6 +26,78 @@ test('existing lyrics use detected first/last words without replacing corrected 
 });
 const lineProject=(lines)=>{const p=createProject();p.duration=60000;p.clips=lines.map(([s,e,t])=>makeClip('lyrics',p.tracks[0].id,s,e,t));return p;};
 const phrase=(text,start)=>text.split(' ').map((text,i)=>({text,start:start+i*400,end:start+i*400+300}));
+test('whole-song search finds pasted lyrics beyond the nearby window and two-minute cap',()=>{
+ const p=lineProject([[1000,2500,'Riding through midnight'],[4000,5500,'Under distant stars']]);p.duration=360000;
+ const words=[...phrase('Riding through midnight',180000),...phrase('Under distant stars',186000)];
+ assert.ok(sync.alignExistingLyrics(p,words,{windowMs:5000}).proposals.every(r=>r.status==='unmatched'));
+ const r=sync.alignExistingLyrics(p,words,{windowMs:5000,mode:'song'});
+ assert.deepEqual(r.proposals.map(row=>[row.start,row.end]),[[180000,181100],[186000,187100]]);
+ assert.ok(r.proposals.every(row=>row.status==='matched'));
+ assert.equal(p.clips[0].start,1000);
+ assert.deepEqual(sync.alignmentRequestedRange(p.clips,p.duration,5000,0,'song'),{start:0,end:360000});
+});
+test('whole-song search preserves pasted line order after a previous partial alignment crosses lines',()=>{
+ const p=lineProject([[1000,2500,'Silver morning sky'],[9000,11000,'Over distant mountains'],[6000,8500,'Hear the thunder']]);
+ p.clips[1].timingSource='aligned';
+ const words=[...phrase('Silver morning sky',1300),...phrase('Over distant mountains',9500),...phrase('Hear the thunder',11500)];
+ const r=sync.alignExistingLyrics(p,words,{windowMs:5000,mode:'song'});
+ assert.deepEqual(r.proposals.map(row=>[row.clipId,row.start,row.end]),[[p.clips[0].id,1300,2400],[p.clips[1].id,9500,10600],[p.clips[2].id,11500,12600]]);
+ assert.ok(r.proposals.every(row=>row.status==='matched'));
+ const timeline=sync.alignExistingLyrics(p,words,{windowMs:5000,mode:'song',order:'timeline'});
+ assert.deepEqual(timeline.proposals.map(row=>row.clipId),[p.clips[0].id,p.clips[2].id,p.clips[1].id]);
+ // Two equal-scoring sequences are valid; timeline order must not match all three out of order.
+ assert.equal(timeline.proposals.filter(row=>row.status!=='unmatched').length,2);
+});
+test('whole-song repeats remain reviewable and cannot reuse one recognized occurrence',()=>{
+ const p=lineProject([[1000,2500,'Bring me home'],[4000,5500,'Bring me home']]);
+ const words=[...phrase('Bring me home',20000),...phrase('Bring me home',40000)];
+ const r=sync.alignExistingLyrics(p,words,{windowMs:5000,mode:'song'});
+ assert.deepEqual(r.proposals.map(row=>[row.start,row.end,row.status]),[[20000,21100,'review'],[40000,41100,'review']]);
+ const one=sync.alignExistingLyrics(p,words.slice(0,3),{windowMs:5000,mode:'song'});
+ assert.equal(one.proposals.filter(row=>row.status!=='unmatched').length,1);
+ assert.equal(one.proposals.find(row=>row.status!=='unmatched').status,'review');
+ const selected=sync.alignExistingLyrics(p,words.slice(0,3),{windowMs:5000,mode:'song',clipIds:[p.clips[1].id]});
+ assert.equal(selected.proposals[0].status,'review');
+ assert.equal(sync.applyLyricAlignment(p,r,[]),p);
+});
+test('merging pasted lines keeps their source position for whole-song alignment',()=>{
+ const p=lineProject([[1000,2500,'Silver morning'],[3000,4500,'Over mountains'],[6000,8500,'Hear thunder']]);
+ const store=new EditorStore();store.setProject(p);store.select(p.clips.slice(0,2).map(c=>c.id));store.merge();
+ assert.deepEqual(store.project.clips.map(c=>c.text),['Silver morning Over mountains','Hear thunder']);
+ const r=sync.alignExistingLyrics(store.project,[...phrase('Silver morning Over mountains',20000),...phrase('Hear thunder',25000)],{windowMs:5000,mode:'song'});
+ assert.deepEqual(r.proposals.map(row=>[row.start,row.status]),[[20000,'matched'],[25000,'matched']]);
+ store.undo();assert.deepEqual(store.project,p);
+});
+test('repeated lyrics with split spelling still require occurrence review',()=>{
+ const p=lineProject([[1000,2500,'Alright, go!'],[4000,5500,'All right go!']]);
+ const r=sync.alignExistingLyrics(p,phrase('All right go',40000),{windowMs:5000,mode:'song',clipIds:[p.clips[0].id]});
+ assert.equal(r.proposals[0].status,'review');assert.equal(r.proposals[0].matchedWords,2);
+});
+test('whole-song search respects selected lines, locked tracks and the audible range',()=>{
+ const p=lineProject([[1000,2500,'Silver morning sky'],[4000,5500,'Hear the thunder']]);
+ const words=[...phrase('Silver morning sky',1300),...phrase('Hear the thunder',25000)];
+ const options={windowMs:5000,mode:'song',clipIds:[p.clips[1].id],range:{start:20000,end:30000}};
+ const r=sync.alignExistingLyrics(p,words,options);
+ assert.deepEqual(r.proposals.map(row=>[row.clipId,row.start,row.end]),[[p.clips[1].id,25000,26100]]);
+ const applied=sync.applyLyricAlignment(p,r,[p.clips[1].id]);assert.equal(applied.clips[0],p.clips[0]);
+ p.tracks[0].locked=true;assert.equal(sync.alignExistingLyrics(p,words,options).proposals.length,0);
+});
+test('recognizer word splits preserve one original lyric word and its complete audio interval',()=>{
+ const p=lineProject([[1000,3000,'Alright, go!'],[5000,7500,'We walked offstage']]);
+ const words=[...phrase('All right go',1300),...phrase('We walked off stage',5300)];
+ const r=sync.alignExistingLyrics(p,words,{windowMs:2000});
+ assert.deepEqual(r.proposals.map(row=>[row.start,row.end,row.matchedWords]),[[1300,2400,2],[5300,6800,3]]);
+ const next=sync.applyLyricAlignment(p,r,p.clips.map(c=>c.id));
+ assert.equal(next.clips[0].text,'Alright, go!');assert.equal(next.clips[1].text,'We walked offstage');
+ assert.deepEqual(next.clips[0].words[0],{text:'Alright,',start:1300,end:2000});
+ assert.deepEqual(next.clips[1].words.at(-1),{text:'offstage',start:6100,end:6800});
+ assert.ok(r.proposals.every(row=>row.status==='matched'));
+});
+test('recognizer word splits cannot join speech across a long instrumental gap',()=>{
+ const p=lineProject([[1000,4000,'Offstage tonight']]);
+ const words=[{text:'off',start:1000,end:1300},{text:'stage',start:10000,end:10300},{text:'tonight',start:10400,end:11000}];
+ assert.equal(sync.alignExistingLyrics(p,words,{windowMs:5000,mode:'song'}).proposals[0].status,'unmatched');
+});
 test('repeated choruses align to nearby occurrences in order',()=>{
  const p=lineProject([[1000,3000,'We rise again'],[21000,23000,'We rise again']]);
  const r=sync.alignExistingLyrics(p,[...phrase('We rise again',1300),...phrase('We rise again',21300)],{windowMs:25000});
